@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, Alert} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, Alert, DeviceEventEmitter} from 'react-native';
 import RNBenibeacon from 'react-native-benibeacon';
 
 const instructions = Platform.select({
@@ -15,7 +15,8 @@ const instructions = Platform.select({
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
-
+var listenerRanging
+var listenerMonitoring
 export default class App extends Component {
   constructor(props){
     super(props)
@@ -36,6 +37,32 @@ export default class App extends Component {
   async forceStartService(){
     return await RNBenibeacon.forceStartServices()
   }
+  async bindingService(){
+    return await RNBenibeacon.bindingService()
+  }
+  
+  async startMonitoring(){
+    return await RNBenibeacon.beaconMonitor()
+  }
+  async startMonitoringUUID(region){
+    return await RNBenibeacon.beaconMonitorUUID(region)
+  }
+  async startRanging(){
+    return await RNBenibeacon.beaconRanging()
+  }
+  async startRangingUUID(region){
+    return await RNBenibeacon.beaconRangingUUID(region)
+  }
+  async stopMonitoring(){
+    return await RNBenibeacon.stopBeaconMonitor()
+  }
+  async stopRanging(){
+    return await RNBenibeacon.stopBeaconRanging()
+  }
+  async stopRangingUUID(region){
+    return await RNBenibeacon.stopBeaconRangingUUID(region)
+  }
+
   _startServices(){
     let start = this.startService()
     start
@@ -64,6 +91,52 @@ export default class App extends Component {
       console.log(error);
     });
   }
+  _bindingService(){
+    let binding = this.bindingService();
+    binding.then((item) => {
+      console.log(item);
+    }).catch((error)=>{
+      console.log(error);
+    });
+  }
+
+  _startMonitor(){
+    this.startMonitoring()
+  }
+  _startMonitorUUID(region){
+    this.startMonitoringUUID(region)
+  }
+  _startRanging(){
+    this.startRanging()
+  }
+  _startRanginUUID(region){
+    this.startRangingUUID(region)
+  }
+  _stopMonitoring(){
+    this.stopMonitoring()
+  }
+  _stopRanging(){
+    this.stopRanging()
+  }
+  _stopRangingUUID(region){
+    this.stopRangingUUID(region)
+  }
+
+  componentDidMount(){
+    this._startServices()
+    this._bindingService()
+    // this._startMonitor()
+    this._startRanging()
+    listenerRanging = DeviceEventEmitter.addListener('onRange', (collection) => {
+      for(let val of collection.beacons){
+        console.log('onRange '+val.uuid+' '+val.macaddress+' '+val.major+' '+val.minor+' '+val.rssi);
+      }
+    });
+    // listenerMonitoring = DeviceEventEmitter.addListener('enterRegion', (region) => {
+    //   console.log(`Region ${region.region}`)
+    //   // this._startRange()
+    // })
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -87,6 +160,18 @@ export default class App extends Component {
           onPress={() => {
             this._forceStartServices()
           }}          
+        />
+        <Button
+          title="Start Monitor"
+          onPress={() => {
+            this._startMonitor()
+          }}
+        />
+        <Button
+          title="Stop Monitor"
+          onPress={() => {
+            this._stopMonitoring()
+          }}
         />
       </View>
     );

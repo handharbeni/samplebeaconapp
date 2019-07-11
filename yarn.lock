@@ -4853,10 +4853,10 @@ react-is@^16.8.1, react-is@^16.8.3, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-native-benibeacon@1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/react-native-benibeacon/-/react-native-benibeacon-1.1.11.tgz#a9aa8a858b53d55ae171e85001b0d1aa854648e3"
-  integrity sha512-32Q6Id4Pi4Dn0ZbQuB3hiyrASsRZljSXtYCBqKXuh8X5jgRFOmLGtSgynfnHFIyCNijLGT8kx61YHStkfrAoGw==
+react-native-benibeacon@1.1.23:
+  version "1.1.23"
+  resolved "https://registry.yarnpkg.com/react-native-benibeacon/-/react-native-benibeacon-1.1.23.tgz#dd475e3df04d8ca2e858b7ce3088486f31692c85"
+  integrity sha512-D9xlhAUNTcFQaFbbfZhxt9EKqqpvgmJ3sWXargI1/4qQIxY7mHi07eJW177FL3TktaPgwGGf7HuxpZwMxrJIjg==
 
 react-native@0.59.8:
   version "0.59.8"

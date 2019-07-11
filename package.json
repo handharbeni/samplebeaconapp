@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.8",
-    "react-native-benibeacon": "1.1.11"
+    "react-native-benibeacon": "1.1.23"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
